@@ -33,5 +33,5 @@ mv container-qsign.service ~/.config/systemd/user/
 
 systemctl --user restart container-qsign
 
-systemctl --user status container-qsign
+systemctl --user enable container-qsign
 ```
