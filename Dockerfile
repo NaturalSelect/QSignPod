@@ -1,24 +1,19 @@
-# 第一阶段：使用Gradle镜像构建Jar文件
 FROM gradle:7.4.2-jdk11 AS builder
 
-# 设置工作目录
 WORKDIR /app
 
-# 复制项目文件到容器的工作目录中
-COPY . /app
+RUN apt update && apt install -y git
 
-# 构建项目
-RUN gradle build
+COPY "build_qsign.sh" "./build_qsign.sh"
 
-# 第二阶段：使用JRE镜像运行应用程序
+RUN ./build_qsign.sh
+
 FROM openjdk:11-jre-slim
 
-# 设置工作目录
 WORKDIR /app
 
-# 从第一阶段复制构建好的Jar文件到当前镜像
-COPY --from=builder /app/build/libs/unidbg-fetch-qsign-*-all.jar ./unidbg-fetch-qsign-all.jar
-COPY --from=builder /app/txlib ./txlib
+COPY --from=builder /app/unidbg-fetch-qsign/build/libs/unidbg-fetch-qsign-*-all.jar ./unidbg-fetch-qsign-all.jar
+COPY "txlib" ./txlib
 COPY "entry_point.sh" "./entry_point.sh"
 
 ENTRYPOINT [ "./entry_point.sh" ]
