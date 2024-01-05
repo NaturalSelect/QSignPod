@@ -4,7 +4,7 @@
     "port": 8080
   },
   "share_token": true,
-  "count": 100,
+  "count": 10,
   "key": "114514",
   "auto_register": true,
   "protocol": {
@@ -15,8 +15,8 @@
   },
   "unidbg": {
     "dynarmic": false,
-    "unicorn": false,
     "kvm": false,
+    "unicorn": true,
     "debug": false
   },
   "black_list": [
