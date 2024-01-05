@@ -19,9 +19,6 @@ WORKDIR /app
 # 从第一阶段复制构建好的Jar文件到当前镜像
 COPY --from=builder /app/build/libs/unidbg-fetch-qsign-*-all.jar ./unidbg-fetch-qsign-all.jar
 COPY --from=builder /app/txlib ./txlib
+COPY "entry_point.sh" "./entry_point.sh"
 
-# 暴露项目运行的端口号
-EXPOSE 8080
-
-# 启动项目
-CMD ["java", "-jar", "unidbg-fetch-qsign-all.jar", "--basePath=./txlib/8.9.71"]
+ENTRYPOINT [ "./entry_point.sh" ]

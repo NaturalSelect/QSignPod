@@ -15,8 +15,8 @@
 docker run -d --restart=always \
     --name qsign \
     -p {host_port}:8080 \
-    -e BASE_PATH=/srv/qsign/qsign/txlib/{version} \
-    xzhouqd/qsign:core-{core-ver}
+    -e BASE_PATH=/app/txlib/{version} \
+    naturalselect/qsignpod:latest
 ```
 
 ## Podman
@@ -25,8 +25,8 @@ docker run -d --restart=always \
 docker run -d --restart=always \
     --name qsign \
     -p {host_port}:8080 \
-    -e BASE_PATH=/srv/qsign/qsign/txlib/{version} \
-    xzhouqd/qsign:core-{core-ver}
+    -e BASE_PATH=/app/txlib/{version} \
+    naturalselect/qsignpod:latest
 ```
 
 **使用systemd：**
