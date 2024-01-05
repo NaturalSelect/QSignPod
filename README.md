@@ -9,7 +9,37 @@
 
 # 部署方法
 
-**[Wiki](https://github.com/fuqiuluo/unidbg-fetch-qsign/wiki)**
+## Docker
+
+```bash
+docker run -d --restart=always \
+    --name qsign \
+    -p {host_port}:8080 \
+    -e BASE_PATH=/srv/qsign/qsign/txlib/{version} \
+    xzhouqd/qsign:core-{core-ver}
+```
+
+## Podman
+
+```bash
+docker run -d --restart=always \
+    --name qsign \
+    -p {host_port}:8080 \
+    -e BASE_PATH=/srv/qsign/qsign/txlib/{version} \
+    xzhouqd/qsign:core-{core-ver}
+```
+
+**使用systemd：**
+
+```bash
+docker generate systemd --name qsign --new -f
+
+mv container-qsign.service ~/.config/systemd/user/
+
+systemctl --user restart container-qsign
+
+systemctl --user status container-qsign
+```
 
 # 你可能需要的项目
 
